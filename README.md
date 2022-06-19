@@ -26,4 +26,6 @@ The REST API Endpoints created in this project is as follows.
     Get all the employees list
     ```
 
-3. 
+3. Create a model, where it will fetch the data from the database, and return the data, which then will be accepted inside  
+   the controller.
+   

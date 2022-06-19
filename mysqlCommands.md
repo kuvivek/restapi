@@ -2,7 +2,7 @@ Follow the instructions for running the mysql in a docker from this link:
 https://hub.docker.com/r/mysql/mysql-server
 
 ```
-MacBook-Pro:restapi vivek$ docker run --name=mysql1 -d mysql/mysql-server:5.7
+MacBook-Pro:restapi vivek$ docker run -p 3306:3306 --name=mysql1 -d mysql/mysql-server:5.7
 Unable to find image 'mysql/mysql-server:5.7' locally
 5.7: Pulling from mysql/mysql-server
 fae25b9d3939: Pull complete
@@ -45,6 +45,25 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'Pa5Sw0rD';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql>
+mysql> SELECT host FROM mysql.user WHERE User = 'root';
++-----------+
+| host      |
++-----------+
+| localhost |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'Pa5Sw0rD';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
 ```
 
 Now Adding the following entries 
@@ -61,11 +80,32 @@ mysql> CREATE  TABLE IF NOT EXISTS `employees` (   `id` BIGINT UNSIGNED AUTO_INC
 Query OK, 0 rows affected (0.01 sec)
 
 mysql>
-mysql>
+mysql> exit
+```
+
+Now, connect mysql container from the localhost.
+
+```
+MacBook-Pro:restapi vivek$ mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 5.7.38 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
 ```
 
 Then insert the values in the database table 
 
+```
 INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Maria', 'Anders', 'mariaanders@gmail.com', '1234567890', 'Microsoft', 'Full Stack Developer', '50000.00', '1', '0', '2022-06-19 21:14:30');
 
 INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Ana', 'Trujilo', 'anatrujilo@gmail.com', '9876543210', 'Google', 'Software Engineer', '55500.00', '1', '0', '2022-06-19 21:14:30');
@@ -75,3 +115,5 @@ INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`
 INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Thomas', 'Hardy', 'thomashardy@gmail.com', '2143658709', 'Microsoft', 'Full Stack Developer', '70000.00', '1', '0', '2022-06-19 21:14:30');
 
 INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Christina', 'Berglund', 'christinaberglund@gmail.com', '8976453201', 'Meta', 'Software Architect', '80000.00', '1', '0', '2022-06-19 21:14:30');
+
+s```
