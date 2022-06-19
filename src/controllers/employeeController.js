@@ -13,3 +13,7 @@ exports.getEmployeeList = (req, res) =>{
     res.send(employees);
   });
 };
+
+exports.getEmployeeByID = (req, res) => {
+  console.log('Get Employee by ID');
+};
