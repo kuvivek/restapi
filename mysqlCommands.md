@@ -116,4 +116,4 @@ INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`
 
 INSERT INTO `node_mysql_crud_db`.`employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Christina', 'Berglund', 'christinaberglund@gmail.com', '8976453201', 'Meta', 'Software Architect', '80000.00', '1', '0', '2022-06-19 21:14:30');
 
-s```
+```
