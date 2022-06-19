@@ -32,5 +32,18 @@ Employee.getAllEmployees = (result) => {
 
 };
 
+//  Create a model for the function which retrives employee by ID, It accepts id as first parameter and it returns result
+Employee.getEmployeeByID = (id, result) => {
+  dbConn.query('SELECT * FROM employees WHERE id=?', id, (err, res) => {
+    if(err) {
+      console.log('Error while fetching employee by id', err);
+      result(null,err)
+    } else {
+    result(null, res);
+    }
+  });
+
+};
+
 // Export the Employee object which has the function getAllEmployees defined.
 module.exports = Employee;

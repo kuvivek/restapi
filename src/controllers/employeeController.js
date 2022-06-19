@@ -15,5 +15,11 @@ exports.getEmployeeList = (req, res) =>{
 };
 
 exports.getEmployeeByID = (req, res) => {
-  console.log('Get Employee by ID');
+  // console.log('Get Employee by ID');
+  EmployeeModel.getEmployeeByID(req.params.id, (err, employee) => {
+    if(err) res.send(err);
+    // Fetch the employees and display at both console log as well as browser.
+    console.log('Single Employee Data', employee);
+    res.send(employee);
+  });  
 };
